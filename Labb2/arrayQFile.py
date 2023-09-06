@@ -14,6 +14,10 @@ class ArrayQ:
     def dequeue(self):
         return self._arr.pop(0)
     
+    def isEmpty(self):
+        return len(self._arr) == 0
+
+    
     
 def maain():
     q = ArrayQ()

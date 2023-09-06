@@ -23,53 +23,56 @@ from linkedQFile import LinkedQ
 #         self.assertEqual(q.dequeue(), 3)
 
 # if __name__ == "__main__":
-#     unittest.main()
+#     unittest.main()"""  """
 
 
 def kortlek():
-    sorterad_kortlek = ArrayQ()
-    kortlek = []
+    kö = ArrayQ()
+    # kortlek = []
+    sorterad_kortlek = []
 
-    val = input("Skriv K för att mata in kort själv, skriv R för att köra automatiskt: ")
+    val = input(
+        "Skriv K för att mata in kort själv, skriv R för att köra automatiskt: ")
     if val == "K" or val == "k":
         kortlek_input = input(
-            "Skriv ordningen av korten med mellanslag emellan: ").split()
-        for kort in kortlek_input:
-            kort = int(kort)
-            kortlek.append(kort)
+            "Skriv ordningen av korten med mellanslag emellan: ")
+        kortlek = kortlek_input.split(" ")
     elif val == "R" or val == "r":
         kortlek = [7, 1, 12, 2, 8, 3, 11, 4, 9, 5, 13, 6, 10]
-        kortlek_input = kortlek  # endast för utskrift
 
-    while len(kortlek) > 0:
-        kortlek.append(kortlek.pop(0))
-        sorterad_kortlek.enqueue(kortlek.pop(0))
+    for kort in kortlek:
+        kö.enqueue(int(kort))  # lägger till i en kö
 
-    print(f"Inmatad kortlek: {kortlek_input}")
-    print(f"Sorterad kortlek:{sorterad_kortlek}")
+    while not kö.isEmpty():
+        kö.enqueue(kö.dequeue())
+        sorterad_kortlek.append(kö.dequeue())
 
-#kortlek()
+    return sorterad_kortlek
+
+
+#print(kortlek())
+
 
 def kortlekLinkedQueue():
-    sorterad_kortlek = LinkedQ()
-    kortlek = []
+    kö = LinkedQ()
+    sorterad_kortlek = []
 
-    val = input("Skriv K för att mata in kort själv, skriv R för att köra automatiskt: ")
+    val = input(
+        "Skriv K för att mata in kort själv, skriv R för att köra automatiskt: ")
     if val == "K" or val == "k":
         kortlek_input = input(
-            "Skriv ordningen av korten med mellanslag emellan: ").split()
-        for kort in kortlek_input:
-            kort = int(kort)
-            kortlek.append(kort)
+            "Skriv ordningen av korten med mellanslag emellan: ")
+        kortlek = kortlek_input.split(" ")
     elif val == "R" or val == "r":
         kortlek = [7, 1, 12, 2, 8, 3, 11, 4, 9, 5, 13, 6, 10]
-        kortlek_input = kortlek  # endast för utskrift
 
-    while len(kortlek) > 0:
-        kortlek.append(kortlek.pop(0))
-        sorterad_kortlek.enqueue(kortlek.pop(0))
+    for kort in kortlek:
+        kö.enqueue(int(kort))  # lägger till i en kö
 
-    print(f"Inmatad kortlek: {kortlek_input}")
-    print(f"Sorterad kortlek:{sorterad_kortlek}")
+    while not kö.isEmpty():
+        kö.enqueue(kö.dequeue())
+        sorterad_kortlek.append(kö.dequeue())
 
-kortlekLinkedQueue()
+    return sorterad_kortlek
+
+print(kortlekLinkedQueue())

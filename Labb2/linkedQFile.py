@@ -22,19 +22,18 @@ class LinkedQ():
 
     def enqueue(self,x):
         new_node = Node(x)
-        if self.isEmpty(): #ifall linked lsitan är tom
-            self._first= new_node
-            self._last = new_node
+        if self.isEmpty(): #ifall linked kön är tom
+            self._first= new_node #head "pekar" på första noden
+            self._last = new_node #tail "pekar" på första noden då det bara är den noden som ligger i kön
         else:
-            self._last.next = new_node
-            self._last = new_node
+            self._last.next = new_node #den nya noden läggs till efter första noden
+            self._last = new_node #den nya noden är den sista noden i kön
     
     def dequeue(self): #vill ta bort första saken i kön
         item_to_retrieve = self._first #sparar värde av försa saken i kön
-        self._first = self._first.next # gör att första saken i listan blir saken som låg efter first
+        self._first = self._first.next # gör att första noden i listan blir noden som låg efter vad som förut va första noden
         return item_to_retrieve.value
         
-    
     def isEmpty(self):
         if self._first is None:
             return True
