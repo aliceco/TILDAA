@@ -31,5 +31,5 @@ def maain():
         print("FAILED")
 
 
-if __name__ == "__main__": # fattar inte vad den här ska göra? den fungerar inte
+if __name__ == "__main__": 
     maain()
