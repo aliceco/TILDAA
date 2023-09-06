@@ -14,11 +14,11 @@ class LinkedQ():
             return "Queue is empty"
         else:
             resultat = []
-
-            while self._first is not None:
-                resultat.append(self._first)
-
-        return str(self._arr)
+            element = self._first
+            while element is not None:
+                resultat.append(str(element.value))
+                element = self._first.next
+        return resultat
 
     def enqueue(self,x):
         new_node = Node(x)
