@@ -43,12 +43,11 @@ def kortlek():
     for kort in kortlek:
         kö.enqueue(int(kort))  # lägger till i en kö
 
-    while not kö.isEmpty():
-        kö.enqueue(kö.dequeue())
-        sorterad_kortlek.append(kö.dequeue())
+    while not kö.isEmpty(): #så länge kön inte är tom
+        kö.enqueue(kö.dequeue()) #lägger det översta kortet under
+        sorterad_kortlek.append(kö.dequeue()) #plocksr ut det nya översta kortet och lägger till i en ny list aså att värden kan printas
 
     return sorterad_kortlek
-
 
 #print(kortlek())
 
