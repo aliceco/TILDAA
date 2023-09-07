@@ -1,6 +1,7 @@
 import unittest
 from arrayQFile import ArrayQ
 from linkedQFile import LinkedQ
+import sys
 
 
 # class TestQueue(unittest.TestCase):
@@ -66,7 +67,7 @@ def kortlekLinkedQueue():
         kortlek = [7, 1, 12, 2, 8, 3, 11, 4, 9, 5, 13, 6, 10]
 
     for kort in kortlek:
-        kö.enqueue(int(kort))  # lägger till i en kö
+        kö.enqueue(kort)  # lägger till i en kö
 
     while not kö.isEmpty():
         kö.enqueue(kö.dequeue())
