@@ -7,7 +7,6 @@ def kortlekLinkedQueue():
     indata = input("Input: ")
     kortlek = indata.split(" ")
 
-
     for kort in kortlek:
         kö.enqueue(kort)  # lägger till i en kö
 
