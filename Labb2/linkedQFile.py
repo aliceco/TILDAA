@@ -30,7 +30,7 @@ class LinkedQ():
             self._last = new_node #den nya noden är den sista noden i kön
     
     def dequeue(self): #vill ta bort första saken i kön
-        item_to_retrieve = self._first #sparar värde av försa saken i kön
+        item_to_retrieve = self._first #sparar noden av försa saken i kön
         self._first = self._first.next # gör att första noden i listan blir noden som låg efter vad som förut va första noden
         return item_to_retrieve.value
         
