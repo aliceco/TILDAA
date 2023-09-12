@@ -40,25 +40,28 @@ print("\n")
 
 #Uppgift 3
 
-with open("Labb3/engelska.txt", "r", encoding= "utf-8") as engelskfil:
+
+svenska = Bintree()
+with open("Labb3/word3.txt", "r", encoding = "utf-8") as svenskfil: 
+    for rad in svenskfil:
+        ordet = rad.strip()                # Ett trebokstavsord per rad
+        if ordet in svenska:
+            print(ordet, end = " ") 
+        else:
+            svenska.put(ordet)             # in i sökträdet
+print("\n") #koden kommer göra det gär först innan den kör själva uppgiften
+
+engelska = Bintree()
+meddelande = ""
+with open("Labb3/engelska.txt", "r", encoding="utf-8") as engelskfil:
     for rad in engelskfil:
-        print(rad.strip())
-
-"""
-engelska filen
-Måste ta bort tomma rader
-måste separera orden baserat på split
-måste ta bort "-tecken och punkter och '-tecken och !-tecken (alltså en jävla massa tecken)
-"""
-
-"""
-vi ska använda uppgift 2
-vi får ord - kollar om det finns i engelska ordlistan
-om nej - stoppa in
-om ja - kolla om det oxå finns i svenska
-    om ja - kolla om finns i utskriften
-        om ja - ingenting
-        om nej - skriv ut
-    om nej - ingenting
-
-"""
+        orden = rad.split()
+        for ordet in orden:  # Ett trebokstavsord per rad
+            if ordet in engelska:
+                pass
+            else:
+                engelska.put(ordet.strip())        # in i sökträdet
+                if ordet in svenska:
+                    meddelande += ordet.strip() + " "
+print(meddelande)
+print("\n")
