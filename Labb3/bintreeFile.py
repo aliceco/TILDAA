@@ -23,35 +23,31 @@ class Bintree:
 
 def putta(p, newvalue):
     # Funktion som gör själva jobbet att stoppa in en ny nod
-    #skapa nod
-    #kolla om trädet är tomt 
-    # - stoppa in som root om tom
-    #else - jämför eller mindre än roten
-    # avsluta när p är tomt
-    #returnera p
-
-    new_node = Node(newvalue)
-    if p == None:
-        p = new_node
-    elif newvalue > p.value:
-        if p.right == None:
+    new_node = Node(newvalue) #skapar nytt Nod-objekt
+    if p == None: #kollar om root är tom
+        p = new_node 
+    elif newvalue > p.value: #kollar om nya värdet är mindre än det tidigare nod värdet
+        if p.right == None: #flyttar noden till höger i trädet och kollar p.right pekar på None
             p.right = new_node
+        else: #om det finns något där p.right pekar, 
+            putta(p.right, newvalue) #gör om proceduren
+    elif newvalue < p.value: #samma process som ovan men kollar p.left istället
+        if p.left == None:
+            p.left = new_node
         else:
-            putta(p.right, newvalue)
-    elif newvalue < p.value: #gör samma sak där uppe
-        putta(p.left, newvalue)
+            putta(p.left, newvalue)
     return p
 
 def finns(p,value): #wtf not working
     # Funktion som gör själva jobbet att söka efter ett värde
-    if p.value == None:
+    if p == None:
         return False
-    elif p.value == value:
+    if value == p.value:
         return True
-    elif value > p.value:
-        finns(p.right,value)
-    elif value < p.value:
-        finns(p.left, value)
+    if value < p.value:
+        return finns(p.left,value)
+    if value > p.value:
+        return finns(p.right, value)
 
 def skriv(p):
      # Funktion som gör själva jobbet att skriva ut trädet
