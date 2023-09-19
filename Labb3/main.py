@@ -1,4 +1,4 @@
-from bintreeFile import Bintree
+from Labb4.bintreeFile import Bintree
 """
 uppgift 1
 def makeTree():
@@ -25,22 +25,8 @@ def main():
 
 main()
 """
-"""
-Uppgift 2
-svenska = Bintree()
-with open("Labb3/word3.txt", "r", encoding = "utf-8") as svenskfil:
-    for rad in svenskfil:
-        ordet = rad.strip()                # Ett trebokstavsord per rad
-        if ordet in svenska:
-            print(ordet, end = " ") 
-        else:
-            svenska.put(ordet)             # in i sökträdet
-print("\n")
-"""
 
-#Uppgift 3
-
-
+#Uppgift 2 & 3
 svenska = Bintree()
 with open("Labb3/word3.txt", "r", encoding = "utf-8") as svenskfil: 
     for rad in svenskfil:
@@ -49,19 +35,19 @@ with open("Labb3/word3.txt", "r", encoding = "utf-8") as svenskfil:
             print(ordet, end = " ") 
         else:
             svenska.put(ordet)             # in i sökträdet
-print("\n") #koden kommer göra det gär först innan den kör själva uppgiften
+print("\n") 
 
 engelska = Bintree()
 meddelande = ""
 with open("Labb3/engelska.txt", "r", encoding="utf-8") as engelskfil:
     for rad in engelskfil:
-        orden = rad.split()
-        for ordet in orden:  # Ett trebokstavsord per rad
+        orden = rad.split() # ett ord per rad
+        for ordet in orden:  
             if ordet in engelska:
                 pass
             else:
-                engelska.put(ordet.strip())        # in i sökträdet
-                if ordet in svenska:
-                    meddelande += ordet.strip() + " "
+                engelska.put(ordet.strip())        #in i engelska sökträdet
+                if ordet in svenska: #kollar om ordet finns i svenskaa sökträdet
+                    meddelande += ordet + " "  #sparar ordet i en string för senare utskrift (lite onödigt men fungerar)
 print(meddelande)
 print("\n")
