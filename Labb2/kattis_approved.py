@@ -1,4 +1,4 @@
-from linkedQFile import LinkedQ
+from Labb4.linkedQFile import LinkedQ
 
 def kortlekLinkedQueue():
     kö = LinkedQ()
