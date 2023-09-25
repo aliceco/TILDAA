@@ -1,5 +1,5 @@
 from linkedQFile import LinkedQ
-from bintreeFile import Bintree
+from Labb5.bintreeFile import Bintree
 svenska = Bintree()  # Skapar ett binärt sökträd för de svenska orden
 gamla = Bintree()  # Skapar ett binärt sökträd för de gamla orden
 
