@@ -17,14 +17,5 @@ def main():
     print(f"{len(kdrama_dict)} element")
     print(f"{tabell.collisions} krockar")
     
-    krockar_lst = tabell.collisions
-    krockar_lst.sort()
-    print(krockar_lst)
-   
-    for i in range(len(krockar_lst)):
-        print(krockar_lst[i])
-        if krockar_lst[i] == krockar_lst[i-1]:
-
-
 
 main()

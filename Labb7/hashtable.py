@@ -15,7 +15,7 @@ class Hashtable:
     def __init__(self, size):
         self.size = size #can be used to tell how many objects in table
         self.table = [None] * size #creates a table with capacity number of elements and all elements are set to None
-        self.collisions = []
+        self.collisions = 0
 
 
     def store(self, key, data):
@@ -23,7 +23,7 @@ class Hashtable:
         if self.table[index] is None: 
             self.table[index] = HashNode(key, data)
         else:
-            self.collisions.append(index)
+            self.collisions += 1
             existing_node = self.table[index]
             self.table[index] = HashNode(key, data)
             self.table[index].pointer = existing_node
@@ -42,5 +42,4 @@ class Hashtable:
         hash_num = ""
         for i in key[::-1]:
             hash_num += str(len(key)*27 + ord(i)**2)
-
         return int(hash_num) % self.size #returnerar index
