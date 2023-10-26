@@ -3,17 +3,26 @@ from linkedQFile import LinkedQ
 class Syntax_error(Exception):
     pass
 
+def atom_check(q, molekyl):
+    if molekyl.isalpha():
+        uppercase(q, molekyl)
+    else:
+        uppercase(q, molekyl)
+        lowercase(q)
+        number(q)
+
 def uppercase(q, molekyl):
     if q.peek().isupper():
         q.dequeue()
-        lowercase(q)
+        
         return
-    raise Syntax_error(f"Saknad stor bokstav vid radslutet {molekyl}") 
+    else:
+        raise Syntax_error(f"Saknad stor bokstav vid radslutet {molekyl}") 
 
 def lowercase(q):
     if q.isEmpty() is False and q.peek().islower():
         q.dequeue()
-    number(q)
+    return
 
 def number(q):
     number = []
@@ -22,31 +31,28 @@ def number(q):
         q.dequeue()
     
     if len(number) == 0: 
-        return
+        pass
     elif number[0] == 0: 
         if len(number) > 1:
-            raise Syntax_error(f"För litet tal vid radslutet {''.join(str(num) for num in number[1:])}")
+            raise Syntax_error(f"För litet tal vid radslut vid {''.join(str(num) for num in number[1:])}")
         else:
             raise Syntax_error("För litet tal vid radslutet")
     elif number[0] == 1 and len(number) == 1:
         raise Syntax_error("För litet tal vid radslutet")
         
+
 def molecule_syntax(molecule_input):
     q = LinkedQ()
     for i in molecule_input:
         q.enqueue(i)
 
     try:
-        uppercase(q, molecule_input)
+        atom_check(q, molecule_input)
     except Syntax_error as error:
-        return str(error)
+        return error
     return "Formeln är syntaktiskt korrekt"
+    
+# def main(molecule_input):
+#     print(molecule_syntax(molecule_input))
+    
 
-def main():
-    while True:
-        molecule_input = input("")
-        if molecule_input == "#":
-            break
-        print(molecule_syntax(molecule_input))
-
-main()
