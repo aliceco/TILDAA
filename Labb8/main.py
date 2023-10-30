@@ -42,11 +42,11 @@ def molecule_syntax(molecule_input):
         return str(error)
     return "Formeln är syntaktiskt korrekt"
 
-def main():
-    while True:
-        molecule_input = input("")
-        if molecule_input == "#":
-            break
-        print(molecule_syntax(molecule_input))
+# def main():
+#     while True:
+#         molecule_input = input("")
+#         if molecule_input == "#":
+#             break
+#         print(molecule_syntax(molecule_input))
 
-main()
+# main()
