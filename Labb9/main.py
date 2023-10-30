@@ -11,6 +11,8 @@ def readFormel(molecule):
     for i in molecule:
         q.enqueue(i)
     try:
+        left_parentheses.clear()  # Rensar parenteslistorna efter varje instoppad molekyl
+        right_parentheses.clear()
         readMol(q)
         return "Formeln är syntaktiskt korrekt"
     except SyntaxFel as fel:
@@ -29,7 +31,7 @@ def readMol(q):
 
 
 def readGroup(q):
-    if not q.isEmpty() and q.peek() in numbers:
+    if not q.isEmpty() and q.peek() in "0123456789":
         raise SyntaxFel("Felaktig gruppstart vid radslutet")
     if not q.isEmpty() and q.peek() == "(":
         q.dequeue()
@@ -93,14 +95,11 @@ left_parentheses = []
 right_parentheses = []
 
 
-# def main():
-#     while True:
-#         molecule_input = input("")
-#         if molecule_input == "#":
-#             break
-#         print(readFormel(molecule_input))
-#         left_parentheses.clear()  # Rensar parenteslistorna efter varje instoppad molekyl
-#         right_parentheses.clear()
+def main():
+    while True:
+        molecule_input = input("")
+        if molecule_input == "#":
+            break
+        print(readFormel(molecule_input))
 
-
-# main()
+main()
