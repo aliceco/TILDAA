@@ -1,5 +1,5 @@
 from Labb5.bintreeFile import Bintree
-from linkedQFile import LinkedQ
+from Labb10.linkedQFile import LinkedQ
 
 
 #uppgift 1

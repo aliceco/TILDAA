@@ -1,5 +1,5 @@
 from bintreeFile import Bintree
-from linkedQFile import LinkedQ
+from Labb10.linkedQFile import LinkedQ
 
 gamla = Bintree()
 svenska = Bintree()

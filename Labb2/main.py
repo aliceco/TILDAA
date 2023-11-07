@@ -1,6 +1,6 @@
 import unittest
 from arrayQFile import ArrayQ
-from linkedQFile import LinkedQ
+from Labb10.linkedQFile import LinkedQ
 import sys
 
 

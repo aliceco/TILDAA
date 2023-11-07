@@ -1,11 +1,10 @@
 """
-The version with digit list
+Version without the digit list that doesn't go through Kattis 
 
 """
 
 
 from linkedQFile import LinkedQ
-
 
 class SyntaxFel(Exception):
     pass
@@ -32,7 +31,7 @@ def readMol(q):
 
 
 def readGroup(q, left_parenthesis):
-    if q.peek() == ")" or q.peek() in numbers:
+    if (not q.isEmpty() and q.peek().isdigit()) or q.peek() == ")":
         raise SyntaxFel("Felaktig gruppstart vid radslutet")
     if left_parenthesis:
         q.dequeue()
@@ -66,16 +65,14 @@ def letter(q):
 
 def number(q):
     number_exists = False
-    num1 = q.peek()
-    if num1 == "0":
+    if q.peek() == "0":
         q.dequeue()
         raise SyntaxFel("För litet tal vid radslutet")
-    if num1 in numbers:
-        q.dequeue()
-        if num1 == "1" and q.peek() not in numbers:
+    if not q.isEmpty() and q.peek().isdigit():
+        if q.dequeue() == "1" and not q.isEmpty() and not q.peek().isdigit():
             raise SyntaxFel("För litet tal vid radslutet")
         number_exists = True
-        while q.peek() in numbers:
+        while not q.isEmpty() and q.peek().isdigit():
             q.dequeue()
     return number_exists
 
@@ -86,7 +83,6 @@ atomstr = "H   He  Li  Be  B   C   N   O   F   Ne  Na  Mg  Al  Si  P   S   Cl  A
         "Ta  W   Re  Os  Ir  Pt  Au  Hg  Tl  Pb  Bi  Po  At  Rn  Fr  Ra  Ac  Th  Pa  U   Np  Pu  Am  Cm " \
         "Bk  Cf  Es  Fm  Md  No  Lr  Rf  Db  Sg  Bh  Hs  Mt  Ds  Rg  Cn  Fl  Lv"
 atoms = atomstr.split()
-numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 def main():

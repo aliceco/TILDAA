@@ -3,9 +3,14 @@ The version with digit list
 
 """
 
-
 from linkedQFile import LinkedQ
 
+class Ruta:
+    def __init__(self, atom="( )", num=1):
+        self.atom = atom
+        self.num = num
+        self.next = None
+        self.down = None
 
 class SyntaxFel(Exception):
     pass
@@ -32,6 +37,7 @@ def readMol(q):
 
 
 def readGroup(q, left_parenthesis):
+    rutan = Ruta() #skapa ruta som är ett object
     if q.peek() == ")" or q.peek() in numbers:
         raise SyntaxFel("Felaktig gruppstart vid radslutet")
     if left_parenthesis:
@@ -40,44 +46,48 @@ def readGroup(q, left_parenthesis):
             readGroup(q, q.peek() == "(")
         if q.peek() == ")":
             q.dequeue()
-            if not number(q):
+            if not q.isEmpty() and not number(q).isdigit():
                 raise SyntaxFel("Saknad siffra vid radslutet")
+            
+            """
+            Om det är en parentesgrupp ska readgroups anrop till readmol returnera en delmolekyl som sätts under rutan.down.
+            """
+            
             return
         raise SyntaxFel("Saknad högerparentes vid radslutet")
     else:
-        readAtom(q)
+        atom, num = readAtom(q) #num är en tuple så man måste lägga i num[1] för att få siffran
 
 
 def readAtom(q):
-    letter(q)
-    number(q)
+    atom = letter(q)
+    num = number(q)
+    return atom, num
 
 
 def letter(q):
     if not q.isEmpty() and q.peek().isupper():
-        temp = q.dequeue()
+        atom = q.dequeue()
         if not q.isEmpty() and q.peek().islower():
-            temp += q.dequeue()
-        if temp in atoms:
-            return
+            atom += q.dequeue()
+        if atom in atoms:
+            return atom #return the atom?
         raise SyntaxFel("Okänd atom vid radslutet")
     raise SyntaxFel("Saknad stor bokstav vid radslutet")
 
 
 def number(q):
-    number_exists = False
-    num1 = q.peek()
-    if num1 == "0":
-        q.dequeue()
+    num = "" #las till för att kunna retunera
+    if q.peek() == "0":
+        num += q.dequeue()
         raise SyntaxFel("För litet tal vid radslutet")
-    if num1 in numbers:
-        q.dequeue()
-        if num1 == "1" and q.peek() not in numbers:
+    if q.peek() in numbers:
+        num += q.dequeue() #försök på att stoppa ihop siffrorna igen
+        if num == "1" and q.peek() not in numbers:
             raise SyntaxFel("För litet tal vid radslutet")
-        number_exists = True
         while q.peek() in numbers:
-            q.dequeue()
-    return number_exists
+            num += q.dequeue()
+    return num
 
 
 atomstr = "H   He  Li  Be  B   C   N   O   F   Ne  Na  Mg  Al  Si  P   S   Cl  Ar  K   Ca  Sc  Ti  V   Cr " \
@@ -97,4 +107,5 @@ def main():
         print(readFormel(molecule_input))
         
 
-main()
+
+#main()

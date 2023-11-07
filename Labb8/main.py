@@ -1,4 +1,4 @@
-from linkedQFile import LinkedQ
+from Labb10.linkedQFile import LinkedQ
 
 class Syntax_error(Exception):
     pass
